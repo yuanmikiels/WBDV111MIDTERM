@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthSync Clinic - Availability</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8f0ff 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, #1e40af, #3730a3);
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: #64748b;
+            font-size: 1.2rem;
+        }
+
+        .availability-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .date-picker {
+            background: white;
+            border: 2px solid #e2e8f0;
+            padding: 1rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #4f46e5;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .date-picker:hover {
+            border-color: #4f46e5;
+            box-shadow: 0 5px 20px rgba(79, 70, 229, 0.15);
+        }
+
+        .specialty-filter {
+            background: white;
+            color: #64748b;
+            border: 2px solid #e2e8f0;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .specialty-filter.active,
+        .specialty-filter:hover {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border-color: #4f46e5;
+        }
+
+        .today-highlight {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white !important;
+            border-color: #10b981 !important;
+        }
+
+        .availability-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border: 1px solid #f1f5f9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .doctor-availability {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border: 1px solid #f1f5f9;
+            transition: all 0.3s ease;
+        }
+
+        .doctor-availability:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .doctor-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .doctor-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .doctor-info h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+        }
+
+        .doctor-specialty {
+            color: #4f46e5;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .availability-legend {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+        }
+
+        .time-slot {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .time-available {
+            background: #d1fae5;
+            color: #065f46;
+            border-color: #10b981;
+        }
+
+        .time-available:hover {
+            background: #10b981;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .time-booked {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+
+        .time-break {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .no-availability {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+            font-style: italic;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #4f46e5;
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-secondary:hover {
+            background: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
+        }
+
+        @media (max-width: 768px) {
+            .doctors-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .time-slots {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .availability-controls {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-buttons">
+			<a href="healthsyncclinic.html" class="nav-btn" onclick="showSection('book')">Book</a>
+            <a href="staff.html" class="nav-btn" onclick="showSection('staff')">Staff</a>
+            <a href="history.html" class="nav-btn" onclick="showSection('history')">History</a>
+            <a href="availability.html" class="nav-btn" id="availabilityBtn" onclick="toggleAvailability()">Availability</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="page-header">
+            <div class="logo">HealthSync Clinic</div>
+            <h1 class="page-title">Doctor Availability</h1>
+            <p class="page-subtitle">See real-time availability and book instantly</p>
+        </div>
+
+        <div class="availability-controls">
+            <button class="date-picker today-highlight" onclick="setToday()">
+                 Today (Dec 12)
+            </button>
+            <button class="date-picker" onclick="setTomorrow()">Tomorrow</button>
+            <button class="date-picker" onclick="setNextWeek()">Next Week</button>
+            <select class="specialty-filter" id="specialtyFilter" onchange="filterBySpecialty()">
+                <option value="all">All Specialties</option>
+                <option value="cardiology">Cardiology</option>
+                <option value="dermatology">Dermatology</option>
+                <option value="pediatrics">Pediatrics</option>
+                <option value="dentistry">Dentistry</option>
+                <option value="neurology">Neurology</option>
+            </select>
+        </div>
+
+        <div class="availability-stats">
+            <div class="stat-card">
+                <div class="stat-number">18</div>
+                <div class="stat-label">Open Slots Today</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">92%</div>
+                <div class="stat-label">Avg Availability</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4.9</div>
+                <div class="stat-label">Avg Rating</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">&lt;15 min</div>
+                <div class="stat-label">Wait Time</div>
+            </div>
+        </div>
+
+        <div class="doctors-grid">
+            <div class="doctor-availability" data-specialty="cardiology">
+                <div class="doctor-header">
+                    <div class="doctor-avatar">SS</div>
+                    <div class="doctor-info">
+                        <h3>Dr. Sarah Smith</h3>
+                        <div class="doctor-specialty">Cardiologist</div>
+                    </div>
+                </div>
+                <div class="availability-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #10b981;"></div>
+                        <span>Available</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #f3f4f6;"></div>
+                        <span>Booked</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #fef3c7;"></div>
+                        <span>Break</span>
+                    </div>
+                </div>
+                <div class="time-slots">
+                    <div class="time-slot time-booked">9:00</div>
+                    <div class="time-slot time-available" onclick="bookSlot('SS', '10:00')">10:00</div>
+                    <div class="time-slot time-available" onclick="bookSlot('SS', '10:45')">10:45</div>
+                    <div class="time-slot time-booked">11:30</div>
+                    <div class="time-slot time-available" onclick="bookSlot('SS', '14:00')">14:00</div>
+                    <div class="time-slot time-break">14:45</div>
+                    <div class="time-slot time-available" onclick="bookSlot('SS', '15:30')">15:30</div>
+                    <div class="time-slot time-booked">16:15</div>
+                    <div class="time-slot time-available" onclick="bookSlot('SS', '17:00')">17:00</div>
+                </div>
+            </div>
+
+            <div class="doctor-availability" data-specialty="dermatology">
+                <div class="doctor-header">
+                    <div class="doctor-avatar">EL</div>
+                    <div class="doctor-info">
+                        <h3>Dr. Emily Lee</h3>
+                        <div class="doctor-specialty">Dermatologist</div>
+                    </div>
+                </div>
+                <div class="time-slots">
+                    <div class="time-slot time-available" onclick="bookSlot('EL', '9:30')">9:30</div>
+                    <div class="time-slot time-booked">10:15</div>
+                    <div class="time-slot time-available" onclick="bookSlot('EL', '11:00')">11:00</div>
+                    <div class="time-slot time-available" onclick="bookSlot('EL', '11:45')">11:45</div>
+                    <div class="time-slot time-break">13:00</div>
+                    <div class="time-slot time-available" onclick="bookSlot('EL', '14:15')">14:15</div>
+                    <div class="time-slot time-booked">15:00</div>
+                    <div class="time-slot time-available" onclick="bookSlot('EL', '15:45')">15:45</div>
+                    <div class="time-slot time-available" onclick="bookSlot('EL', '16:30')">16:30</div>
+                </div>
+            </div>
+
+            <div class="doctor-availability" data-specialty="pediatrics">
+                <div class="doctor-header">
+                    <div class="doctor-avatar">AD</div>
+                    <div class="doctor-info">
+                        <h3>Dr. Anna Davis</h3>
+                        <div class="doctor-specialty">Pediatrician</div>
+                    </div>
+                </div>
+                <div class="time-slots">
+                    <div class="time-slot time-booked">9:00</div>
+                    <div class="time-slot time-available" onclick="bookSlot('AD', '9:45')">9:45</div>
+                    <div class="time-slot time-booked">10:30</div>
+                    <div class="time-slot time-available" onclick="bookSlot('AD', '11:15')">11:15</div>
+                    <div class="time-slot time-break">12:30</div>
+                    <div class="time-slot time-available" onclick="bookSlot('AD', '14:00')">14:00</div>
+                    <div class="time-slot time-available" onclick="bookSlot('AD', '14:45')">14:45</div>
+                    <div class="time-slot time-booked">15:30</div>
+                    <div class="time-slot time-available" onclick="bookSlot('AD', '16:15')">16:15</div>
+                </div>
+            </div>
+
+            <div class="doctor-availability" data-specialty="dentistry">
+                <div class="doctor-header">
+                    <div class="doctor-avatar">JR</div>
+                    <div class="doctor-info">
+                        <h3>Dr. James Rodriguez</h3>
+                        <div class="doctor-specialty
