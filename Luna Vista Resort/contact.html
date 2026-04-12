@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact - Luna Vista Resort</title>
+  <link rel="stylesheet" href="contact.css">
+</head>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f5f8e8;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 50px;
+  background: white;
+}
+
+header h2 {
+  color: #3a5f2c;
+}
+
+nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #333;
+}
+
+nav .active {
+  color: #c7db32;
+}
+
+.contact {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.contact h1 {
+  color: #3a5f2c;
+}
+
+.contact p {
+  margin: 10px 0 30px;
+}
+
+.contact-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+form {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  width: 300px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+form input, form textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+form button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: #c7db32;
+  border-radius: 20px;
+}
+
+.info {
+  text-align: left;
+  max-width: 300px;
+}
+
+.info h3 {
+  color: #3a5f2c;
+  margin-bottom: 10px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  margin-top: 30px;
+  background: white;
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+</style>
+<body>
+
+<header>
+  <h2>Zest Hotel</h2>
+  <nav>
+	<a href="package.html">Package</a>
+    <a href="contact.html">Contact</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<section class="contact">
+  <h1>Contact Us</h1>
+  <p>We’d love to hear from you! Reach out anytime.</p>
+
+  <div class="contact-container">
+
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+
+    <div class="info">
+      <h3>Hotel Info</h3>
+      <p>Address: Zest Hotel, Legian, Bali</p>
+      <p> Phone: +63 912 345 6789</p>
+      <p> Email: info@zesthotel.com</p>
+      <p> Open: 24/7</p>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Luna Vista Resort. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
