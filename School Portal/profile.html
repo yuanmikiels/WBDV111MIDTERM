@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Profile - ScholarPortal</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background: #f4f1ea;
+    color: #2c2c2c;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: #2c3e50;
+    color: white;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.nav-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    background: #f0e6d2;
+    color: #2c2c2c;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border-left: 5px solid #8b5e3c;
+}
+
+.main {
+    padding: 30px;
+}
+
+/* PROFILE CARD */
+.profile-card {
+    background: #fffdf7;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 8px solid #8b5e3c;
+    margin-bottom: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0;
+}
+
+.courses {
+    background: #fffdf7;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 8px solid #8b5e3c;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.table th {
+    text-align: left;
+}
+
+.btn {
+    margin-top: 15px;
+    padding: 10px;
+    background: #2c3e50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.transcript {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #2c3e50;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">ScholarPortal</div>
+
+    <div class="nav-links">
+        <a href="index.html">Courses</a>
+        <a href="register.html">Register</a>
+        <a href="profile.html">Profile</a>
+    </div>
+</div>
+
+<div class="main">
+
+    <h1>Student Profile</h1>
+
+    <div class="profile-card">
+        <h2>Student Information</h2>
+
+        <div class="row">
+            <span><strong>Name:</strong></span>
+            <span>Yuan San Diego</span>
+        </div>
+
+        <div class="row">
+            <span><strong>Student ID:</strong></span>
+            <span>2026-00123</span>
+        </div>
+
+        <div class="row">
+            <span><strong>Course:</strong></span>
+            <span>BS Information Technology</span>
+        </div>
+
+        <div class="row">
+            <span><strong>Year Level:</strong></span>
+            <span>1st Year</span>
+        </div>
+
+        <button class="btn">Edit Profile</button>
+    </div>
+
+    <div class="courses">
+        <h2>Enrolled Courses</h2>
+
+        <table class="table">
+            <tr>
+                <th>Course</th>
+                <th>Units</th>
+                <th>Status</th>
+            </tr>
+
+            <tr>
+                <td>WEB DEVELOPMENT 111</td>
+                <td>3</td>
+                <td>Enrolled</td>
+            </tr>
+
+            <tr>
+                <td>PC ASSEMBLY, TROUBLESHOOTING, AND MAINTENANCE w/ DIGITAL LOGICS 111</td>
+                <td>3</td>
+                <td>Enrolled</td>
+            </tr>
+
+            <tr>
+                <td>INTERMEDIATE PROGRAMMING 111</td>
+                <td>4</td>
+                <td>Enrolled</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>
