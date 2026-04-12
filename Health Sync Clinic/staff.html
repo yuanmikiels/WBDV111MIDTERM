@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthSync Clinic - Staff Directory</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8f0ff 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, #1e40af, #3730a3);
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+
+        .filter-btn {
+            background: white;
+            color: #4f46e5;
+            border: 2px solid #e2e8f0;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .staff-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #f1f5f9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .staff-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+        }
+
+        .staff-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .staff-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.3);
+        }
+
+        .staff-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .staff-specialty {
+            font-size: 1.1rem;
+            color: #4f46e5;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .staff-rating {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: #f59e0b;
+        }
+
+        .stars {
+            display: flex;
+            gap: 0.2rem;
+        }
+
+        .star {
+            font-size: 1.2rem;
+        }
+
+        .staff-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1.5rem;
+            padding: 1rem 0;
+            border-top: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e293b;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .staff-bio {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-book {
+            flex: 1;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-book:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-profile {
+            flex: 1;
+            background: white;
+            color: #4f46e5;
+            border: 2px solid #e2e8f0;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-profile:hover {
+            background: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #64748b;
+        }
+
+        .no-results-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .staff-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .filters {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="nav-buttons">
+<a href="healthsyncclinic.html" class="nav-btn" onclick="showSection('book')">Book</a>
+            <a href="staff.html" class="nav-btn" onclick="showSection('staff')">Staff</a>
+            <a href="history.html" class="nav-btn" onclick="showSection('history')">History</a>
+            <a href="availability.html" class="nav-btn" id="availabilityBtn" onclick="toggleAvailability()">Availability</a>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="page-header">
+            <div class="logo">HealthSync Clinic</div>
+            <h1 class="page-title">Meet Our Doctors</h1>
+            <p class="page-subtitle">24+ board-certified specialists across 8 departments</p>
+        </div>
+
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All Specialties</button>
+            <button class="filter-btn" data-filter="cardiology">Cardiology</button>
+            <button class="filter-btn" data-filter="dermatology">Dermatology</button>
+            <button class="filter-btn" data-filter="pediatrics">Pediatrics</button>
+            <button class="filter-btn" data-filter="dentistry">Dentistry</button>
+            <button class="filter-btn" data-filter="neurology">Neurology</button>
+        </div>
+
+        <div class="staff-grid" id="staffGrid">
+            <div class="staff-card" data-specialty="cardiology">
+                <div class="staff-avatar">SS</div>
+                <div class="staff-name">Dr. Sarah Smith</div>
+                <div class="staff-specialty">Cardiologist</div>
+                <div class="staff-rating">
+                    <div class="stars">
+                        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                    </div>
+                    <span>(4.9 • 127 reviews)</span>
+                </div>
+                <div class="staff-stats">
+                    <div class="stat">
+                        <span class="stat-number">98%</span>
+                        <span class="stat-label">Success Rate</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">12 yrs</span>
+                        <span class="stat-label">Experience</span>
+                    </div>
+                </div>
+                <div class="staff-bio">
+                    Specializes in preventive cardiology and heart disease management. 15+ years serving our community.
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-book" onclick="bookDoctor('Dr. Sarah Smith', 'cardiology')">Book Now</button>
+                    <button class="btn-profile">View Profile</button>
+                </div>
+            </div>
+
+            <div class="staff-card" data-specialty="cardiology">
+                <div class="staff-avatar">MJ</div>
+                <div class="staff-name">Dr. Michael Johnson</div>
+                <div class="staff-specialty">Cardiologist</div>
+                <div class="staff-rating">
+                    <div class="stars">
+                        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">☆</span>
+                    </div>
+                    <span>(4.8 • 89 reviews)</span>
+                </div>
+                <div class="staff-stats">
+                    <div class="stat">
+                        <span class="stat-number">95%</span>
+                        <span class="stat-label">Success Rate</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">10 yrs</span>
+                        <span class="stat-label">Experience</span>
+                    </div>
+                </div>
+                <div class="staff-bio">
+                    Expert in interventional cardiology with advanced training in structural heart disease.
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-book" onclick="bookDoctor('Dr. Michael Johnson', 'cardiology')">Book Now</button>
+                    <button class="btn-profile">View Profile</button>
+                </div>
+            </div>
+
+            <div class="staff-card" data-specialty="dermatology">
+                <div class="staff-avatar">EL</div>
+                <div class="staff-name">Dr. Emily Lee</div>
+                <div class="staff-specialty">Dermatologist</div>
+                <div class="staff-rating">
+                    <div class="stars">
+                        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                    </div>
+                    <span>(4.9 • 203 reviews)</span>
+                </div>
+                <div class="staff-stats">
+                    <div class="stat">
+                        <span class="stat-number">97%</span>
+                        <span class="stat-label">Success Rate</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">11 yrs</span>
+                        <span class="stat-label">Experience</span>
+                    </div>
+                </div>
+                <div class="staff-bio">
+                    Skin cancer screening specialist. Uses latest laser and cosmetic dermatology techniques.
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-book" onclick="bookDoctor('Dr. Emily Lee', 'dermatology')">Book Now</button>
+                    <button class="btn-profile">View Profile</button>
+                </div>
+            </div>
+
+            <div class="staff-card" data-specialty="pediatrics">
+                <div class="staff-avatar">AD</div>
+                <div class="staff-name">Dr. Anna Davis</div>
+                <div class="staff-specialty">Pediatrician</div>
+                <div class="staff-rating">
+                    <div class="stars">
+                        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                    </div>
+                    <span>(5.0 • 156 reviews)</span>
+                </div>
+                <div class="staff-stats">
+                    <div class="stat">
+                        <span class="stat-number">99%</span>
+                        <span class="stat-label">Success Rate</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">14 yrs</span>
+                        <span class="stat-label">Experience</span>
+                    </div>
+                </div>
+                <div class="staff-bio">
+                    Board-certified pediatrician with special interest in newborn care and developmental pediatrics.
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-book" onclick="bookDoctor('Dr. Anna Davis', 'pediatrics')">Book Now</button>
+                    <button class="btn-profile">View Profile</button>
+                </div>
+            </div>
+
+            <div class="staff-card" data-specialty="dentistry">
+                <div class="staff-avatar">JR</div>
+                <div class="staff-name">Dr. James Rodriguez</div>
+                <div class="staff-specialty">Dentist</div>
+                <div class="staff-rating">
+                    <div class="stars">
+                        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                    </div>
+                    <span>(4.9 • 94 reviews)</span>
+                </div>
+                <div class="staff-stats">
+                    <div class="stat">
+                        <span class="stat-number">96%</span>
+                        <span class="stat-label">Success Rate</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">9 yrs</span>
+                        <span class="stat-label">Experience</span>
+                    </div>
+                </div>
+                <div class="staff-bio">
+                    Specializes in cosmetic dentistry, implants, and orthodontics. Pain-free procedures guaranteed.
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-book" onclick="bookDoctor('Dr. James Rodriguez', 'dentistry')">Book Now</button>
+                    <button class="btn-profile">View Profile</button>
+                </div>
+            </div>
+
+            <div class="staff-card" data-specialty="neurology">
+                <div class="staff-avatar">LK</div>
+                <div class="staff-name">Dr. Lisa Kim</div>
+                <div class="staff-specialty">Neurologist</div>
+                <div class="staff-rating">
+                    <div class="stars">
+                        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">☆</span>
+                    </div>
+                    <span>(4.8 • 67 reviews)</span>
+                </div>
+                <div class="staff-stats">
+                    <div class="stat">
+                        <span class="stat-number">94%</span>
+                        <span class="stat-label">Success Rate</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">13 yrs</span>
+                        <span class="stat-label">Experience</span>
+                    </div>
+                </div>
+                <div class="staff-bio">
+                    Headache and migraine specialist. Advanced training in neurophysiology and epilepsy management.
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-book" onclick="bookDoctor('Dr. Lisa Kim', 'neurology')">Book Now</button>
+                    <button class

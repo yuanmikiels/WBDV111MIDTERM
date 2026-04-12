@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Venue - Nexus Events</title>
+  <link rel="stylesheet" href="venue.css">
+</head>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+.nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 40px;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(10px);
+  z-index: 100;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+  background: linear-gradient(45deg,#ff6b6b,#ffd93d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+nav a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: white;
+}
+
+nav .active {
+  color: #ffd93d;
+}
+
+.hero {
+  height: 300px;
+  background: url("background.jpg") center/cover no-repeat;
+  position: relative;
+  margin-top: 70px;
+}
+
+.overlay {
+  background: rgba(0,0,0,0.6);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay h1 {
+  font-size: 3rem;
+}
+
+.overlay p {
+  opacity: 0.8;
+}
+
+.venue {
+  padding: 50px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.venue-card {
+  background: rgba(255,255,255,0.1);
+  padding: 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  max-width: 700px;
+  width: 100%;
+}
+
+.venue-card h2 {
+  margin-bottom: 10px;
+}
+
+.info-grid {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.info-box {
+  flex: 1;
+  background: rgba(255,255,255,0.15);
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.features-title {
+  margin-top: 20px;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.feature {
+  background: rgba(255,255,255,0.2);
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+.map {
+  padding: 40px;
+  text-align: center;
+}
+
+.map iframe {
+  width: 90%;
+  height: 300px;
+  border-radius: 15px;
+  border: none;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0,0,0,0.5);
+}
+
+@media (max-width: 768px) {
+  .nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .overlay h1 {
+    font-size: 2rem;
+  }
+
+  .info-grid {
+    flex-direction: column;
+  }
+}
+</style>
+<body>
+
+<header class="nav">
+  <h2 class="logo">Nexus Events</h2>
+  <nav>
+<a href="nexusevents.html" class="nav-btn active" onclick="showSection('events')">Events</a>
+            <a href="tickets-venue-guestlist.html" class="nav-btn active" onclick="showSection('tickets')">Tickets</a>
+            <a href="venue.html" class="nav-btn" onclick="showSection('venue')">Venue</a>
+            <a href="guestlist.html" class="nav-btn" id="availabilityBtn" onclick="toggleAvailability('guestlist')">Guestlist</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="overlay">
+    <h1>The Electric Factory</h1>
+    <p>Where music meets energy</p>
+  </div>
+</section>
+
+<section class="venue">
+  <div class="venue-card">
+    
+    <h2>Location</h2>
+    <p>123 Nightlife Street, Downtown City</p>
+
+    <div class="info-grid">
+      <div class="info-box">
+        <h3> Doors Open</h3>
+        <p>9:00 PM</p>
+      </div>
+
+      <div class="info-box">
+        <h3> Last Entry</h3>
+        <p>2:00 AM</p>
+      </div>
+
+      <div class="info-box">
+        <h3> Capacity</h3>
+        <p>2000 Guests</p>
+      </div>
+    </div>
+
+    <h2 class="features-title">Venue Features</h2>
+
+    <div class="features">
+      <div class="feature">✔ Premium Sound System</div>
+      <div class="feature">✔ VIP Balcony</div>
+      <div class="feature">✔ LED Light Show</div>
+      <div class="feature">✔ Free Coat Check</div>
+      <div class="feature">✔ Full Bar Access</div>
+      <div class="feature">✔ Dance Floor Arena</div>
+    </div>
+
+  </div>
+</section>
+
+<section class="map">
+  <h2>Find Us</h2>
+  <iframe 
+    src="https://maps.google.com/maps?q=nightclub&t=&z=13&ie=UTF8&iwloc=&output=embed"
+    allowfullscreen="">
+  </iframe>
+</section>
+
+<footer>
+  <p>© 2026 Nexus Events. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
