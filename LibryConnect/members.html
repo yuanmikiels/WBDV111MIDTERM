@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Members - LibryConnect</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background: #f5f1e6;
+    color: #2c2c2c;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: #3e2f1c;
+    color: #f5f1e6;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    background: #e6d3a3;
+    color: #2c2c2c;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 2px dashed #b89b5e;
+    font-family: 'Courier New', monospace;
+}
+
+.main {
+    padding: 30px;
+}
+
+.search-bar {
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    width: 300px;
+    padding: 10px;
+    border: 2px solid #b89b5e;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fffaf0;
+}
+
+.table th, .table td {
+    padding: 12px;
+    border-bottom: 1px solid #d6c7a1;
+    text-align: left;
+}
+
+.table th {
+    background: #e6d3a3;
+}
+
+.active {
+    color: green;
+}
+
+.overdue {
+    color: red;
+}
+
+.btn {
+    padding: 6px 10px;
+    border: none;
+    background: #3e2f1c;
+    color: white;
+    cursor: pointer;
+}
+
+.overdue-box {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #8b0000;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">LibryConnect</div>
+
+    <div class="nav-links">
+        <a href="index.html">Search</a>
+        <a href="members.html">Members</a>
+        <a href="loans.html">Loans</a>
+    </div>
+</div>
+
+<div class="main">
+
+    <h1>Library Members</h1>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Search member...">
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>Member ID</th>
+            <th>Name</th>
+            <th>Books Borrowed</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+
+        <tr>
+            <td>001</td>
+            <td>John Doe</td>
+            <td>2</td>
+            <td class="active">Active</td>
+            <td><button class="btn">View</button></td>
+        </tr>
+
+        <tr>
+            <td>002</td>
+            <td>Jane Smith</td>
+            <td>5</td>
+            <td class="overdue">Overdue</td>
+            <td><button class="btn">Notify</button></td>
+        </tr>
+
+    </table>
+
+</div>
+</body>
+</html>
