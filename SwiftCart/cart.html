@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwiftCart - Cart</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f6fa;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 25px;
+    background: #2c3e50;
+    color: white;
+}
+
+.navbar a {
+    margin-left: 10px;
+    padding: 8px 12px;
+    background: white;
+    color: #2c3e50;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 200px;
+    background: white;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+}
+
+.sidebar a {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    background: #ecf0f1;
+    text-decoration: none;
+    color: black;
+    border-radius: 6px;
+}
+
+.main {
+    flex: 1;
+    padding: 20px;
+}
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.cart-table th, .cart-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.cart-table th {
+    background: #ecf0f1;
+}
+
+.action-link {
+    padding: 5px 10px;
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin: 0 2px;
+}
+
+.total-box {
+    margin-top: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.checkout {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background: #27ae60;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.status {
+    margin-top: 15px;
+    padding: 10px;
+    background: #ecf0f1;
+    border-radius: 6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <h2>SwiftCart</h2>
+	</div>
+
+<div class="container">
+
+    <div class="sidebar">
+        <a href="index.html">Catalog</a>
+        <a href="cart.html">Cart</a>
+        <a href="checkout.html">Checkout</a>
+    </div>
+
+    <div class="main">
+        <h2>Your Cart</h2>
+
+        <table class="cart-table">
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Action</th>
+            </tr>
+
+            <tr>
+                <td>Chicken Meal</td>
+                <td>$10</td>
+                <td>1</td>
+                <td>
+                    <a href="#" class="action-link">+</a>
+                    <a href="#" class="action-link">-</a>
+                    <a href="#" class="action-link">Remove</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Vegan Bowl</td>
+                <td>$12</td>
+                <td>1</td>
+                <td>
+                    <a href="#" class="action-link">+</a>
+                    <a href="#" class="action-link">-</a>
+                    <a href="#" class="action-link">Remove</a>
+                </td>
+            </tr>
+        </table>
+
+        <div class="total-box">
+            <h3>Total: $22</h3>
+            <a href="#" class="checkout">Proceed to Checkout</a>
+
+            <div class="status">
+                <strong>Status:</strong> Items Ready for Checkout
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

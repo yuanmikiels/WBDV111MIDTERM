@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwiftCart - Checkout</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f6fa;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 25px;
+    background: #2c3e50;
+    color: white;
+}
+
+.navbar a {
+    margin-left: 10px;
+    padding: 8px 12px;
+    background: white;
+    color: #2c3e50;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 200px;
+    background: white;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+}
+
+.sidebar a {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    background: #ecf0f1;
+    text-decoration: none;
+    color: black;
+    border-radius: 6px;
+}
+
+.main {
+    flex: 1;
+    padding: 20px;
+}
+
+.form-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.form-box h3 {
+    margin-top: 0;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.summary {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.checkout-btn {
+    display: block;
+    margin-top: 15px;
+    padding: 12px;
+    background: #27ae60;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.status {
+    margin-top: 15px;
+    padding: 10px;
+    background: #ecf0f1;
+    border-radius: 6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <h2>SwiftCart</h2>
+</div>
+
+<div class="container">
+
+    <div class="sidebar">
+        <a href="index.html">Browse Store</a>
+        <a href="cart.html">Cart</a>
+        <a href="checkout.html">Checkout</a>
+    </div>
+
+    <div class="main">
+
+        <h2>Checkout</h2>
+
+        <div class="form-box">
+            <h3>Shipping Details</h3>
+            <input type="text" placeholder="Full Name">
+            <input type="text" placeholder="Address">
+            <input type="text" placeholder="City">
+            <input type="text" placeholder="Postal Code">
+        </div>
+
+        <div class="form-box">
+            <h3>Payment Method</h3>
+            <input type="text" placeholder="Card Number">
+            <input type="text" placeholder="Expiry Date (MM/YY)">
+            <input type="text" placeholder="CVV">
+        </div>
+
+        <div class="summary">
+            <h3>Order Summary</h3>
+            <p>Chicken Meal - $10</p>
+            <p>Vegan Bowl - $12</p>
+            <strong>Total: $22</strong>
+
+            <a href="#" class="checkout-btn">Place Order</a>
+
+            <div class="status">
+                <strong>Status:</strong> Awaiting Payment → Preparing → Shipped → Delivered
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
